@@ -1,7 +1,13 @@
 <?php
 
-use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ChartsController;
+use App\Http\Controllers\ComponentsController;
+use App\Http\Controllers\TablesController;
+use App\Http\Controllers\UtilitiesController;
+use App\Http\Controllers\PagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,44 +23,44 @@ use Illuminate\Support\Facades\Route;
 Route::get('/welcome', function () {
     return view('welcome');
 });
-Route::get('/error-404', function () {
-    return view('admin.404');
-});
-Route::get('/blank', function () {
-    return view('admin.blank');
-});
-Route::get('/buttons', function () {
-    return view('admin.buttons');
-});
-Route::get('/cards', function () {
-    return view('admin.cards');
-});
-Route::get('/charts', function () {
-    return view('admin.charts');
-});
-Route::get('/forgot-password', function () {
-    return view('admin.forgot-password');
-});
-Route::get('/', function () {
-    return view('admin.index');
+
+
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/login', [AuthController::class, 'loginPost'])->name('login');
+    Route::get('/', [AuthController::class, 'register'])->name('register');
+    Route::post('/', [AuthController::class, 'registerPost'])->name('register.store');
 });
 
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::get('/register', [AuthController::class, 'register'])->name('register');
-Route::post('/register', [AuthController::class, 'registerPost'])->name('register');
+Route::group(['middleware' => 'auth'], function () {
 
-Route::get('/tables', function () {
-    return view('admin.tables');
-});
-Route::get('/animation', function () {
-    return view('admin.utilities-animation');
-});
-Route::get('/border', function () {
-    return view('admin.utilities-border');
-});
-Route::get('/color', function () {
-    return view('admin.utilities-color');
-});
-Route::get('/other', function () {
-    return view('admin.utilities-other');
+    Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('index');
+    });
+
+    Route::group(['prefix' => 'components', 'as' => 'components.'], function () {
+        Route::get('/button', [ComponentsController::class, 'button'])->name('button');
+        Route::get('/card', [ComponentsController::class, 'card'])->name('card');
+    });
+
+    Route::group(['prefix' => 'utilities', 'as' => 'utilities.'], function () {
+        Route::get('/color', [UtilitiesController::class, 'color'])->name('color');
+        Route::get('/border', [UtilitiesController::class, 'border'])->name('border');
+        Route::get('/animation', [UtilitiesController::class, 'animation'])->name('animation');
+        Route::get('/other', [UtilitiesController::class, 'other'])->name('other');
+    });
+
+    Route::group(['prefix' => 'charts', 'as' => 'charts.'], function () {
+        Route::get('/', [ChartsController::class, 'chart'])->name('chart');
+    });
+
+    Route::group(['prefix' => 'tables', 'as' => 'tables.'], function () {
+        Route::get('/', [TablesController::class, 'table'])->name('table');
+    });
+
+    Route::group(['prefix' => 'pages', 'as' => 'pages.'], function () {
+        Route::get('/blank', [PagesController::class, 'blank'])->name('blank');
+    });
 });

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('rep_designation');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->bigInteger('rep_phone')->length(10);
-            $table->biginteger('rep_sec_phone')->length(10);
+            $table->bigInteger('rep_phone');
+            $table->biginteger('rep_sec_phone');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
