@@ -79,7 +79,7 @@ class AuthController extends Controller
 
         // Auth::attempt($credentials);
 
-        return redirect()->route('login')->with('success' ,'Account created, please login to continue!');
+        return redirect()->route('login')->with('success', 'Account created, please login to continue!');
     }
 
     public function logout()
