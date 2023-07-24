@@ -16,19 +16,7 @@
                 </div>
                 <div class="card-body">
                     <p class="login-box-msg">Sign in to start your session</p>
-
-                    @if (session('success'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-                    @if (session('error'))
-                        <div class="alert alert-danger" role="alert">
-                            {{ session('error') }}
-                        </div>
-                    @endif
-
-                    <form action="{{ route('login') }}" method="post">
+                    <form action="{{ route('login.post') }}" method="post">
                         @csrf
                         <div class="input-group mb-3">
                             <input type="email" name="email" id="email" class="form-control" placeholder="Email">
@@ -50,10 +38,12 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="icheck-primary">
-                                    <input type="checkbox" id="remember">
-                                    <label for="remember">
-                                        Remember Me
-                                    </label>
+                                    <p class="mb-1">
+                                        <a href="forgot-password.html">I forgot my password</a>
+                                    </p>
+                                    <p class="mb-0">
+                                        <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
+                                    </p>
                                 </div>
                             </div>
                             <!-- /.col -->
@@ -63,12 +53,6 @@
                             <!-- /.col -->
                         </div>
                     </form>
-                    <p class="mb-1">
-                        <a href="forgot-password.html">I forgot my password</a>
-                    </p>
-                    <p class="mb-0">
-                        <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
-                    </p>
                 </div>
                 <!-- /.card-body -->
             </div>

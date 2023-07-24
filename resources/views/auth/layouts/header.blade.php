@@ -16,4 +16,7 @@
     <link rel="stylesheet" href="{{ url('auth/assets/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ url('auth/assets/css/adminlte.min.css') }}">
+    <!-- SweetAlert2 -->
+    <link href={{ url('admin/vendor/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }} rel="stylesheet">
+
 </head>

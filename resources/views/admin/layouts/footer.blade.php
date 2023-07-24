@@ -36,29 +36,99 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="{{route('logout')}}">Logout</a>
+                <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
             </div>
         </div>
     </div>
 </div>
 
 <!-- Bootstrap core JavaScript-->
-<script src="{{url('admin/vendor/jquery/jquery.min.js')}}"></script>
-<script src="{{url('admin/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{ url('admin/vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ url('admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
 <!-- Core plugin JavaScript-->
-<script src="{{url('admin/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+<script src="{{ url('admin/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="{{url('admin/js/sb-admin-2.min.js')}}"></script>
+<script src="{{ url('admin/js/sb-admin-2.min.js') }}"></script>
 
 <!-- Page level plugins -->
-<script src="{{url('admin/vendor/chart.js/Chart.min.js')}}"></script>
+<script src="{{ url('admin/vendor/chart.js/Chart.min.js') }}"></script>
 
 <!-- Page level custom scripts -->
-<script src="{{url('admin/js/demo/chart-area-demo.js')}}"></script>
-<script src="{{url('admin/js/demo/chart-pie-demo.js')}}"></script>
+<script src="{{ url('admin/js/demo/chart-area-demo.js') }}"></script>
+<script src="{{ url('admin/js/demo/chart-pie-demo.js') }}"></script>
 
+<!-- SweetAlert2 -->
+<script src="{{ url('admin/vendor/sweetalert2/sweetalert2.min.js') }}"></script>
+<!-- Page specific script -->
+<script>
+    $(function() {
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
+        $('.swalDefaultSuccess').click(function() {
+            Toast.fire({
+                icon: 'success',
+                title: 'Congratulations, accouaaaaaaaaaaaaaaant created successfully.'
+            })
+        });
+        $('.swalDefaultInfo').click(function() {
+            Toast.fire({
+                icon: 'info',
+                title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+            })
+        });
+        $('.swalDefaultError').click(function() {
+            Toast.fire({
+                icon: 'error',
+                title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+            })
+        });
+        $('.swalDefaultWarning').click(function() {
+            Toast.fire({
+                icon: 'warning',
+                title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+            })
+        });
+        $('.swalDefaultQuestion').click(function() {
+            Toast.fire({
+                icon: 'question',
+                title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+            })
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
+        // Trigger the toast automatically when the page loads
+        @if (session('success'))
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('success') }}'
+            });
+        @endif
+
+        @if (session('error'))
+            Toast.fire({
+                icon: 'error',
+                title: '{{ session('error') }}'
+            });
+        @endif
+    });
+</script>
 </body>
 
 </html>

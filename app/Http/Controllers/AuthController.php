@@ -22,7 +22,9 @@ class AuthController extends Controller
         ];
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('dashboard.index');
+            $rep_name = Auth::user()->rep_name;
+            $successMessage = $rep_name . ' Logged in successfully.';
+            return redirect()->route('dashboard.index')->with('success', $successMessage);
         }
         return back()->with('error', 'Incorrect email and password');
     }
@@ -70,14 +72,14 @@ class AuthController extends Controller
         $user->password = Hash::make($request['password']);
         $user->save();
 
-        $credentials = [
-            'email' => $user->email,
-            'password' => $request->password,
-        ];
+        // $credentials = [
+        //     'email' => $user->email,
+        //     'password' => $request->password,
+        // ];
 
-        Auth::attempt($credentials);
+        // Auth::attempt($credentials);
 
-        return redirect()->route('dashboard.index')->with('success', 'Congratulations, your account created successfully');
+        return redirect()->route('login')->with('success' ,'Account created, please login to continue!');
     }
 
     public function logout()

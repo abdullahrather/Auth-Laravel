@@ -15,22 +15,16 @@
                 </div>
                 <div class="card-body">
                     <p class="login-box-msg">Register a new membership</p>
-                    @if (session('error'))
-                        <div class="alert alert-danger text-light text-center m-2" role="alert">
-                            {{ session('error') }}
-                        </div>
-                    @endif
-
                     <form action="{{ route('register.store') }}" method="post" id="quickForm">
                         @csrf
                         <div class="input-group mb-3">
                             <input list="institutes" name="hei_name" id="hei_name" class="form-control"
                                 placeholder="Higher Education Institution">
-                                <datalist id="institutes">
-                                    @foreach ($institutes as $institute)
-                                        <option value="{{ $institute }}">
-                                    @endforeach
-                                </datalist>
+                            <datalist id="institutes">
+                                @foreach ($institutes as $institute)
+                                    <option value="{{ $institute }}">
+                                @endforeach
+                            </datalist>
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-university"></span>
@@ -58,7 +52,8 @@
                         </div>
                         <div class="form-group row">
                             <div class="input-group col-md-6">
-                                <input type="email" name="email" id="email" class="form-control" placeholder="Email">
+                                <input type="email" name="email" id="email" class="form-control"
+                                    placeholder="Email">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-envelope"></span>
@@ -66,7 +61,8 @@
                                 </div>
                             </div>
                             <div class="input-group col-md-6">
-                                <input type="email" name="email_confirmation" id="email_confirmation" class="form-control" placeholder="Confrim Email">
+                                <input type="email" name="email_confirmation" id="email_confirmation" class="form-control"
+                                    placeholder="Confrim Email">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-envelope"></span>
